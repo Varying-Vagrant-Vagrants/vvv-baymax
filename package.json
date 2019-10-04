@@ -9,10 +9,11 @@
     "Tom J Nowell <contact@tomjn.com> (https://tomjn.com)"
   ],
   "scripts": {
-    "format": "prettier --write \"./**/*.{js,css,json,md}\""
+    "format": "prettier --write \"./**/*.{js,css,json,md}\"",
+    "postinstall": "cd modules/slackin && gulp"
   },
   "engines": {
-    "node": "10.x"
+    "node": "8.x"
   },
   "dependencies": {
     "hubot": "^3.3.2",
@@ -27,7 +28,8 @@
     "hubot-scripts": "^2.17.2",
     "hubot-shipit": "https://github.com/alfredk/hubot-shipit/archive/image_repair.tar.gz",
     "hubot-slack": "^4.7.1",
-    "hubot-thank-you": "*"
+    "hubot-thank-you": "*",
+    "slackin": "file://./modules/slackin"
   },
   "devDependencies": {
     "husky": "^3.0.8",
