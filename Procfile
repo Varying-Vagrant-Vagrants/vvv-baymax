@@ -1,1 +1,1 @@
-web: bin/hubot -a slack -n Baymax
+web: bin/hubot -a slack
