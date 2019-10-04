@@ -2,7 +2,22 @@
   "name": "vvv-baymax",
   "version": "0.0.0",
   "private": true,
-  "author": "tomjn <contact@tomjn.com>",
+  "author": {
+    "name": "The VVV Team",
+    "url": "https://varyingvagrantvagrants.org"
+  },
+  "contributors": [
+    {
+      "name": "Lorelei Aurora",
+      "email": "iam@l5i.me",
+      "url": "https://l5i.me"
+    },
+    {
+      "name": "Tom J Nowell",
+      "email": "contact@tomjn.com",
+      "url": "https://tomjn.com"
+    }
+  ],
   "description": "I'm inflatable yay!",
   "dependencies": {
     "hubot": "^3.3.2",
