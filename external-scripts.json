@@ -1,9 +1,11 @@
 [
-  "hubot-auth",
+  "hubot-auth-persistent",
   "hubot-bikeshed",
   "hubot-diagnostics",
   "hubot-help",
+  "hubot-mute",
   "hubot-redis-brain",
   "hubot-rules",
-  "hubot-shipit"
+  "hubot-shipit",
+  "hubot-thank-you"
 ]
