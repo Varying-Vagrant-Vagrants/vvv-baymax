@@ -1,24 +1,19 @@
 {
   "name": "vvv-baymax",
+  "description": "I'm inflatable yay!",
   "version": "0.0.0",
   "private": true,
-  "author": {
-    "name": "The VVV Team",
-    "url": "https://varyingvagrantvagrants.org"
-  },
+  "author": "The VVV Team (https://varyingvagrantvagrants.org)",
   "contributors": [
-    {
-      "name": "Lorelei Aurora",
-      "email": "iam@l5i.me",
-      "url": "https://l5i.me"
-    },
-    {
-      "name": "Tom J Nowell",
-      "email": "contact@tomjn.com",
-      "url": "https://tomjn.com"
-    }
+    "Lorelei Aurora <iam@l5i.me> (https://l5i.me)",
+    "Tom J Nowell <contact@tomjn.com> (https://tomjn.com)"
   ],
-  "description": "I'm inflatable yay!",
+  "scripts": {
+    "format": "prettier --write \"./**/*.{js,css,json,md}\""
+  },
+  "engines": {
+    "node": "10.x"
+  },
   "dependencies": {
     "hubot": "^3.3.2",
     "hubot-auth-persistent": ">=0",
@@ -34,7 +29,9 @@
     "hubot-slack": "^4.7.1",
     "hubot-thank-you": "*"
   },
-  "engines": {
-    "node": "10.x"
+  "devDependencies": {
+    "husky": "^3.0.8",
+    "lint-staged": "^9.4.1",
+    "prettier": "^1.18.2"
   }
 }

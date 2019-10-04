@@ -78,7 +78,6 @@ available hubot plugins on [npmjs.com][npmjs] or by using `npm search`:
     hubot-pandapanda a hubot script for panda responses =missu 2014-11-30 0.9.2   hubot hubot-scripts panda
     ...
 
-
 To use a package, check the package's documentation, but in general it is:
 
 1. Use `npm install --save` to add the package to `package.json` and install it
@@ -95,10 +94,7 @@ the `hubot-fun` plugin, but all four of those in `hubot-auto-deploy`.
 
 ```json
 {
-  "hubot-fun": [
-    "crazy",
-    "thanks"
-  ],
+  "hubot-fun": ["crazy", "thanks"],
   "hubot-auto-deploy": "*"
 }
 ```
@@ -121,7 +117,7 @@ repo.
 
 [hubot-scripts]: https://github.com/github/hubot-scripts
 
-##  Persistence
+## Persistence
 
 If you are going to use the `hubot-redis-brain` package (strongly suggested),
 you will need to add the Redis to Go addon on Heroku which requires a verified
