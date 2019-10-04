@@ -3,7 +3,6 @@
   "hubot-bikeshed",
   "hubot-diagnostics",
   "hubot-help",
-  "hubot-heroku-keepalive",
   "hubot-redis-brain",
   "hubot-rules",
   "hubot-shipit"
