@@ -1,0 +1,35 @@
+diff --git a/node_modules/slack-invite-automation/config.js b/node_modules/slack-invite-automation/config.js
+index e577e02..0fe1b3f 100644
+--- a/node_modules/slack-invite-automation/config.js
++++ b/node_modules/slack-invite-automation/config.js
+@@ -1,8 +1,8 @@
+ module.exports = {
+   // your community or team name to display on join page.
+-  community: process.env.COMMUNITY_NAME || 'YOUR-TEAM-NAME',
++  community: process.env.SLACK_SIGNUP_COMMUNITY_NAME || 'YOUR-TEAM-NAME',
+   // your slack team url (ex: socketio.slack.com)
+-  slackUrl: process.env.SLACK_URL || 'YOUR-TEAM.slack.com',
++  slackUrl: process.env.SLACK_SIGNUP_COMMUNITY_URL || 'YOUR-TEAM.slack.com',
+   // access token of slack
+   // see https://github.com/outsideris/slack-invite-automation#issue-token
+   //
+@@ -10,13 +10,13 @@ module.exports = {
+   //   curl -X POST 'https://YOUR-SLACK-TEAM.slack.com/api/users.admin.invite' \
+   //   --data 'email=EMAIL&token=TOKEN&set_active=true' \
+   //   --compressed
+-  slacktoken: process.env.SLACK_TOKEN || 'YOUR-ACCESS-TOKEN',
++  slacktoken: process.env.SLACK_SIGNUP_COMMUNITY_ADMIN_TOKEN || 'YOUR-ACCESS-TOKEN',
+   // an optional security measure - if it is set, then that token will be required to get invited.
+-  inviteToken: process.env.INVITE_TOKEN || null,
++  inviteToken: process.env.SLACK_SIGNUP_INVITE_TOKEN || null,
+   // an optional security measure - if both are set, then recaptcha will be used.
+-  recaptchaSiteKey: process.env.RECAPTCHA_SITE || null,
+-  recaptchaSecretKey: process.env.RECAPTCHA_SECRET || null,
++  recaptchaSiteKey: process.env.SLACK_SIGNUP_RECAPTCHA_SITE || null,
++  recaptchaSecretKey: process.env.SLACK_SIGNUP_RECAPTCHA_SECRET || null,
+   // default locale
+-  locale: process.env.LOCALE || "en",
+-  subpath: process.env.SUBPATH || "/"
++  locale: process.env.SLACK_SIGNUP_LOCALE || "en",
++  subpath: process.env.SLACK_SIGNUP_SUBPATH || "/"
+ };
