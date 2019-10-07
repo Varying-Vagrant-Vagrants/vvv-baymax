@@ -18,6 +18,18 @@ module.exports = robot => {
     return robot.brain.get("read_only_channels");
   };
 
+  // Catch-all listener to mute responses
+  robot.hear(/(.*)$/i, { id: "read-only.catch_all" }, function(msg) {
+    if (getReadOnlyChannels().indexOf(msg.message.room) === -1) {
+      return;
+    }
+
+    msg.finish();
+  });
+
+  const mute_listener = robot.listeners.pop();
+  robot.listeners.unshift(mute_listener);
+
   robot.respond(
     /(?:make |set |mark )?#?([^\s]+) (?:is |as)?read only$/i,
     msg => {
