@@ -1,5 +1,5 @@
 diff --git a/node_modules/slack-invite-automation/config.js b/node_modules/slack-invite-automation/config.js
-index e577e02..0a391d7 100644
+index e577e02..fddc29d 100644
 --- a/node_modules/slack-invite-automation/config.js
 +++ b/node_modules/slack-invite-automation/config.js
 @@ -1,8 +1,8 @@
@@ -18,7 +18,7 @@ index e577e02..0a391d7 100644
    //   --data 'email=EMAIL&token=TOKEN&set_active=true' \
    //   --compressed
 -  slacktoken: process.env.SLACK_TOKEN || 'YOUR-ACCESS-TOKEN',
-+  slacktoken: process.env.HUBOT_SLACK_TOKEN || 'YOUR-ACCESS-TOKEN',
++  slacktoken: process.env.HUBOT_SLACK_ADMIN_TOKEN || 'YOUR-ACCESS-TOKEN',
    // an optional security measure - if it is set, then that token will be required to get invited.
 -  inviteToken: process.env.INVITE_TOKEN || null,
 +  inviteToken: process.env.SLACK_SIGNUP_INVITE_TOKEN || null,

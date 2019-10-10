@@ -1,7 +1,7 @@
 const { WebClient } = require("@slack/client");
 
 module.exports = robot => {
-  const web = new WebClient(robot.adapter.options.token);
+  const web = new WebClient(process.env.HUBOT_SLACK_ADMIN_TOKEN);
 
   const getChannelID = channelName =>
     web.channels.list().then(api_response => {
