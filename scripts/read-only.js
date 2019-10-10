@@ -22,7 +22,10 @@ module.exports = robot => {
       return next();
     }
 
-    if (context.response.message.user.slack.is_bot) {
+    if (
+      context.response.message.user.slack.is_bot ||
+      context.response.message.user.slack.is_app
+    ) {
       return next();
     }
 
