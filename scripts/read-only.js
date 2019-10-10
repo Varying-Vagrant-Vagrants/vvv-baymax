@@ -24,24 +24,26 @@ module.exports = robot => {
 
     web.chat.postEphemeral(
       context.response.message.room,
-      "This is a read only channel, don't say things in here https://media.giphy.com/media/3ov9jPX6j3r9IGO4zC/giphy.gif",
+      "This is a read only channel, don't say things in here!",
       context.response.message.user.id,
       {
-        attachments: {
-          blocks: [
-            {
-              type: "image",
-              title: {
-                type: "plain_text",
-                text: "Oh Hell No",
-                emoji: true
-              },
-              image_url:
-                "https://media.giphy.com/media/3ov9jPX6j3r9IGO4zC/giphy.gif",
-              alt_text: "Oh hell no"
-            }
-          ]
-        }
+        attachments: [
+          {
+            blocks: [
+              {
+                type: "image",
+                title: {
+                  type: "plain_text",
+                  text: "Oh Hell No",
+                  emoji: true
+                },
+                image_url:
+                  "https://media.giphy.com/media/3ov9jPX6j3r9IGO4zC/giphy.gif",
+                alt_text: "Oh hell no"
+              }
+            ]
+          }
+        ]
       }
     );
     web.chat.delete(
