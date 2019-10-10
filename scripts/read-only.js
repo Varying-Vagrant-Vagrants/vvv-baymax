@@ -22,6 +22,10 @@ module.exports = robot => {
       return next();
     }
 
+    if (context.response.message.user.slack.is_bot) {
+      return next();
+    }
+
     web.chat.postEphemeral(
       context.response.message.room,
       "This is a read only channel, don't say things in here!",
@@ -34,7 +38,7 @@ module.exports = robot => {
                 type: "image",
                 title: {
                   type: "plain_text",
-                  text: "Oh Hell No",
+                  text: "Oh Hell No!",
                   emoji: true
                 },
                 image_url:
