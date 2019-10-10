@@ -17,21 +17,25 @@ module.exports = robot => {
     }
     return robot.brain.get("read_only_channels");
   };
-
-  // Catch-all listener to mute responses
-  robot.hear(/(.*)$/i, { id: "read-only.catch_all" }, function(msg) {
-    if (getReadOnlyChannels().indexOf(msg.message.room) === -1) {
-      return;
+  robot.listenerMiddleware(function(context, next, done) {
+    if (getReadOnlyChannels().indexOf(context.response.message.room) === -1) {
+      return next();
     }
 
-    msg.finish();
+    web.chat.postEphemeral(
+      context.response.message.room,
+      "This is a read only channel, don't say things in here https://media.giphy.com/media/3ov9jPX6j3r9IGO4zC/giphy.gif",
+      context.response.message.user.id
+    );
+    web.chat.delete(
+      context.response.message.rawMessage.ts,
+      context.response.message.room
+    );
+    return done();
   });
 
-  const mute_listener = robot.listeners.pop();
-  robot.listeners.unshift(mute_listener);
-
   robot.respond(
-    /(?:make |set |mark )?#?([^\s]+) (?:is |as)?read only$/i,
+    /(?:make |set |mark )?#?([^\s]+) (?:is |as )?read only$/i,
     msg => {
       const channel = msg.match[1].trim();
 
