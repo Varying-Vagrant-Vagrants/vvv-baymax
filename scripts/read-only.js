@@ -1,5 +1,5 @@
 const { WebClient } = require("@slack/client");
-const { pathOr } = require("ramda");
+const { pathOr, remove } = require("ramda");
 
 module.exports = robot => {
   const web = new WebClient(process.env.HUBOT_SLACK_ADMIN_TOKEN);
@@ -19,7 +19,8 @@ module.exports = robot => {
     return robot.brain.get("read_only_channels");
   };
   robot.listenerMiddleware(function(context, next, done) {
-    if (getReadOnlyChannels().indexOf(context.response.message.room) === -1) {
+    const readOnly = getReadOnlyChannels();
+    if (!readOnly.filter(data => data.id === context.response.message.room)) {
       return next();
     }
 
@@ -36,6 +37,8 @@ module.exports = robot => {
     );
 
     if (is_bot || is_app) {
+      console.log({ is_bot });
+      console.log({ is_app });
       return next();
     }
 
@@ -89,11 +92,11 @@ module.exports = robot => {
             );
           }
 
-          if (readOnly.includes(id)) {
+          if (readOnly.filter(data => data.id === id)) {
             return msg.reply(`#${channel} is already read only.`);
           }
 
-          readOnly.push(id);
+          readOnly.push({ id, channel });
           robot.brain.set("read_only_channels", readOnly);
           return msg.reply(`#${channel} is now read only.`);
         })
@@ -120,18 +123,22 @@ module.exports = robot => {
           );
         }
 
-        if (!readOnly.includes(id)) {
+        if (!readOnly.filter(data => data.id === id)) {
           return msg.reply(`#${channel} is not read only.`);
         }
 
-        const index = readOnly.indexOf(id);
-        if (index > -1) {
-          readOnly.splice(index, 1);
-        }
+        remove({ id, channel }, readonly);
 
         robot.brain.set("read_only_channels", readOnly);
         return msg.reply(`#${channel} is no longer read only.`);
       })
       .catch(robot.logger.debug);
+  });
+
+  robot.respond(/which channels are read only$/i, msg => {
+    const readOnly = getReadOnlyChannels();
+    const channels = readOnly.map(data => data.channel);
+    const channel_list = channels.join();
+    return msg.reply(`These channels are read only: ${channel_list}.`);
   });
 };
