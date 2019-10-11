@@ -11,6 +11,13 @@ module.exports = robot => {
       );
       return room ? room.id : "";
     });
+  const getChannel = channelName =>
+    web.channels.list().then(api_response => {
+      const room = api_response.channels.find(
+        channel => channel.name === channelName
+      );
+      return room ? room : "";
+    });
   const isReadOnly = roomId => {
     const readOnly = getReadOnlyChannels();
     return readOnly.filter(data => data.id == roomId).length > 0;
@@ -27,6 +34,7 @@ module.exports = robot => {
       console.log(context.response.message.room + "is not read only");
       return next();
     }
+    console.log(context.response.message.room + "is read only");
 
     const is_bot = pathOr(
       false,
