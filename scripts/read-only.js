@@ -30,6 +30,7 @@ module.exports = robot => {
     return robot.brain.get("read_only_channels");
   };
   robot.listenerMiddleware(function(context, next, done) {
+    console.log("is in listener");
     if (!isReadOnly(context.response.message.room)) {
       console.log(context.response.message.room + "is not read only");
       return next();
