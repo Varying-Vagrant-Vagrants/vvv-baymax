@@ -11,6 +11,10 @@ module.exports = robot => {
       );
       return room ? room.id : "";
     });
+  const isReadOnly = roomId => {
+    const readOnly = getReadOnlyChannels();
+    return readOnly.filter(data => data.id == roomId).length > 0;
+  };
 
   const getReadOnlyChannels = () => {
     if (!robot.brain.get("read_only_channels")) {
@@ -19,8 +23,8 @@ module.exports = robot => {
     return robot.brain.get("read_only_channels");
   };
   robot.listenerMiddleware(function(context, next, done) {
-    const readOnly = getReadOnlyChannels();
-    if (!readOnly.filter(data => data.id === context.response.message.room)) {
+    if (!isReadOnly(context.response.message.room)) {
+      console.log(context.response.message.room + "is not read only");
       return next();
     }
 
@@ -43,7 +47,7 @@ module.exports = robot => {
     }
 
     web.chat.postEphemeral(
-      context.response.message.room,
+      context.response.message.rawMessage.channel,
       "This is a read only channel, don't say things in here!",
       context.response.message.user.id,
       {
@@ -92,7 +96,7 @@ module.exports = robot => {
             );
           }
 
-          if (readOnly.filter(data => data.id === id)) {
+          if (isReadOnly(id)) {
             return msg.reply(`#${channel} is already read only.`);
           }
 
@@ -123,13 +127,13 @@ module.exports = robot => {
           );
         }
 
-        if (!readOnly.filter(data => data.id === id)) {
+        if (!isReadOnly(id)) {
           return msg.reply(`#${channel} is not read only.`);
         }
 
-        remove({ id, channel }, readonly);
+        const newReadOnly = remove({ id, channel }, readonly);
 
-        robot.brain.set("read_only_channels", readOnly);
+        robot.brain.set("read_only_channels", newReadOnly);
         return msg.reply(`#${channel} is no longer read only.`);
       })
       .catch(robot.logger.debug);
@@ -143,6 +147,11 @@ module.exports = robot => {
   });
 
   robot.respond(/no channels are read only$/i, msg => {
+    if (!robot.auth.isAdmin(msg.message.user)) {
+      return msg.reply(
+        "Sorry, only admins can mark all channels as not read only."
+      );
+    }
     robot.brain.set("read_only_channels", []);
     return msg.reply(`There are now no read only channels!`);
   });
