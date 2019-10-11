@@ -24,13 +24,13 @@ module.exports = robot => {
       return next();
     }
 
-    const is_bot = pathor(
+    const is_bot = pathOr(
       false,
       ["response", "message", "user", "slack", "is_bot"],
       context
     );
 
-    const is_app = pathor(
+    const is_app = pathOr(
       false,
       ["response", "message", "user", "slack", "is_app"],
       context
