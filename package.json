@@ -29,6 +29,7 @@
     "hubot-slack": "^4.7.1",
     "hubot-thank-you": "*",
     "patch-package": "^6.2.0",
+    "ramda": "*",
     "slack-invite-automation": "git+https://github.com/outsideris/slack-invite-automation.git"
   },
   "devDependencies": {
