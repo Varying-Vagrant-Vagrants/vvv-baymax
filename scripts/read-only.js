@@ -1,4 +1,5 @@
 const { WebClient } = require("@slack/client");
+const { pathOr } = require("ramda");
 
 module.exports = robot => {
   const web = new WebClient(process.env.HUBOT_SLACK_ADMIN_TOKEN);
@@ -22,10 +23,19 @@ module.exports = robot => {
       return next();
     }
 
-    if (
-      context.response.message.user.slack.is_bot ||
-      context.response.message.user.slack.is_app
-    ) {
+    const is_bot = pathor(
+      false,
+      ["response", "message", "user", "slack", "is_bot"],
+      context
+    );
+
+    const is_app = pathor(
+      false,
+      ["response", "message", "user", "slack", "is_app"],
+      context
+    );
+
+    if (is_bot || is_app) {
       return next();
     }
 
