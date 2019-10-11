@@ -85,7 +85,7 @@ module.exports = robot => {
     );
     return done();
   });
-
+  console.log(robot.middleware.listener);
   robot.respond(
     /(?:make |set |mark )?#?([^\s]+) (?:is |as )?read only$/i,
     msg => {
