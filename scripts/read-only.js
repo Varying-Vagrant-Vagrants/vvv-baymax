@@ -141,4 +141,9 @@ module.exports = robot => {
     const channel_list = channels.join();
     return msg.reply(`These channels are read only: ${channel_list}.`);
   });
+
+  robot.respond(/no channels are read only$/i, msg => {
+    robot.brain.set("read_only_channels", []);
+    return msg.reply(`There are now no read only channels!`);
+  });
 };
