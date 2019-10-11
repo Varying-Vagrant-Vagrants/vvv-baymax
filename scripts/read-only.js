@@ -20,7 +20,7 @@ module.exports = robot => {
     });
   const isReadOnly = roomId => {
     const readOnly = getReadOnlyChannels();
-    return readOnly.filter(data => data.id == roomId).length > 0;
+    return readOnly.some(data => data.id === roomId);
   };
 
   const getReadOnlyChannels = () => {
