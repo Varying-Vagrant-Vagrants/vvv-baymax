@@ -141,7 +141,7 @@ module.exports = robot => {
 
   robot.respond(/which channels are read only$/i, msg => {
     const readOnly = getReadOnlyChannels();
-    const channels = readOnly.map(data => data.channel);
+    const channels = readOnly.map(data => `#${data.channel} (${data.id})`);
     const channel_list = channels.join();
     return msg.reply(`These channels are read only: ${channel_list}.`);
   });
