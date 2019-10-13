@@ -1,5 +1,5 @@
 const { WebClient } = require("@slack/client");
-const { pathOr, remove } = require("ramda");
+const R = require("ramda");
 
 module.exports = robot => {
   const web = new WebClient(process.env.HUBOT_SLACK_ADMIN_TOKEN);
@@ -18,47 +18,47 @@ module.exports = robot => {
       );
       return room ? room : "";
     });
-  const isReadOnly = roomId => {
-    const readOnly = getReadOnlyChannels();
-    return readOnly.some(data => data.id === roomId);
-  };
-
   const getReadOnlyChannels = () => {
     if (!robot.brain.get("read_only_channels")) {
       robot.brain.set("read_only_channels", []);
     }
     return robot.brain.get("read_only_channels");
   };
-  robot.listenerMiddleware(function(context, next, done) {
+  const isReadOnly = roomId => {
+    const readOnly = getReadOnlyChannels();
+    return readOnly.some(data => data.id == roomId);
+  };
+  // robot.listenerMiddleware(function(context, next, done) {
+  robot.catchAll(msg => {
+    const message = msg.message;
     console.log("is in listener");
-    if (!isReadOnly(context.response.message.room)) {
-      console.log(context.response.message.room + "is not read only");
-      return next();
+
+    // only handle channel slack messages
+    if (!message._channel_id) {
+      console.log("Not a slack text message?");
+      msg.finish();
+      return;
     }
-    console.log(context.response.message.room + "is read only");
 
-    const is_bot = pathOr(
-      false,
-      ["response", "message", "user", "slack", "is_bot"],
-      context
-    );
+    if (!isReadOnly(message.room)) {
+      msg.finish();
+      return;
+    }
 
-    const is_app = pathOr(
-      false,
-      ["response", "message", "user", "slack", "is_app"],
-      context
-    );
+    const is_bot = R.pathOr(false, ["user", "slack", "is_bot"], message);
+
+    const is_app = R.pathOr(false, ["user", "slack", "is_app"], message);
 
     if (is_bot || is_app) {
-      console.log({ is_bot });
-      console.log({ is_app });
-      return next();
+      console.log({ is_bot, is_app });
+      msg.finish();
+      return;
     }
 
     web.chat.postEphemeral(
-      context.response.message.rawMessage.channel,
+      message.rawMessage.channel,
       "This is a read only channel, don't say things in here!",
-      context.response.message.user.id,
+      message.user.id,
       {
         attachments: [
           {
@@ -79,13 +79,12 @@ module.exports = robot => {
         ]
       }
     );
-    web.chat.delete(
-      context.response.message.rawMessage.ts,
-      context.response.message.room
-    );
-    return done();
+    console.log(`Deleting message with ts: ${message.rawMessage.ts}`);
+    web.chat.delete(message.rawMessage.ts, message.room);
+    msg.finish();
+    return;
   });
-  console.log(robot.middleware.listener);
+
   robot.respond(
     /(?:make |set |mark )?#?([^\s]+) (?:is |as )?read only$/i,
     msg => {
@@ -140,7 +139,7 @@ module.exports = robot => {
           return msg.reply(`#${channel} is not read only.`);
         }
 
-        const newReadOnly = remove({ id, channel }, readonly);
+        const newReadOnly = R.remove({ id, channel }, readonly);
 
         robot.brain.set("read_only_channels", newReadOnly);
         return msg.reply(`#${channel} is no longer read only.`);
