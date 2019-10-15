@@ -34,10 +34,20 @@ index e577e02..fddc29d 100644
 +  subpath: process.env.SLACK_SIGNUP_SUBPATH || "/"
  };
 diff --git a/node_modules/slack-invite-automation/public/css/style.css b/node_modules/slack-invite-automation/public/css/style.css
-index 89c6744..e8b822f 100644
+index 89c6744..e073f08 100644
 --- a/node_modules/slack-invite-automation/public/css/style.css
 +++ b/node_modules/slack-invite-automation/public/css/style.css
-@@ -41,7 +41,7 @@ float: left;
+@@ -7,8 +7,7 @@ html,body{
+ margin:0;
+ padding:0;
+ font-family: 'Open Sans', sans-serif;
+-background: #fff url(../images/bg.jpg) center top no-repeat;
+-background-size: cover;
++background: #fff;
+ height: 100%;
+ width: 100%;
+ }
+@@ -41,7 +40,7 @@ float: left;
  
  h1{
  font-family: 'Open Sans', sans-serif;
@@ -46,7 +56,7 @@ index 89c6744..e8b822f 100644
  text-align: center;
  font-size: 50px;
  font-weight: 300;
-@@ -58,7 +58,7 @@ h2{
+@@ -58,7 +57,7 @@ h2{
  	text-align: center;
  	font-weight: 300;
  	font-size: 20px;
@@ -55,7 +65,7 @@ index 89c6744..e8b822f 100644
  
  }
  
-@@ -70,19 +70,18 @@ h2 strong{
+@@ -70,19 +69,18 @@ h2 strong{
  
  .information{
  width: 480px;
@@ -77,7 +87,7 @@ index 89c6744..e8b822f 100644
  display: block;
  }
  
-@@ -93,9 +92,9 @@ margin-top: 20px;
+@@ -93,9 +91,9 @@ margin-top: 20px;
  }
  
  .field{
