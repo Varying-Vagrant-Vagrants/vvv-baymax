@@ -34,7 +34,7 @@ index e577e02..fddc29d 100644
 +  subpath: process.env.SLACK_SIGNUP_SUBPATH || "/"
  };
 diff --git a/node_modules/slack-invite-automation/public/css/style.css b/node_modules/slack-invite-automation/public/css/style.css
-index 89c6744..54dc250 100644
+index 89c6744..0fb0af6 100644
 --- a/node_modules/slack-invite-automation/public/css/style.css
 +++ b/node_modules/slack-invite-automation/public/css/style.css
 @@ -7,8 +7,7 @@ html,body{
@@ -87,7 +87,7 @@ index 89c6744..54dc250 100644
  display: block;
  }
  
-@@ -93,20 +91,20 @@ margin-top: 20px;
+@@ -93,21 +91,18 @@ margin-top: 20px;
  }
  
  .field{
@@ -95,10 +95,11 @@ index 89c6744..54dc250 100644
 +background: #fff;
  width: 448px;
 --webkit-border-radius: 30px;-moz-border-radius: 30px;border-radius: 30px;
+-border: none;
+-font-style: italic;
+-font-family: 'Lato', sans-serif;
 +-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;
- border: none;
- font-style: italic;
- font-family: 'Lato', sans-serif;
++border: 1px solid gray;
  font-size: 16px;
 -color: #ffffff;
 +color: #000;
@@ -108,11 +109,12 @@ index 89c6744..54dc250 100644
  }
  	.field:focus {
 -	border: 1px solid #ffffff;
-+	border: 1px solid blue;
- 	padding: 14px;
+-	padding: 14px;
++	border: 1px solid skyblue;
  	}
  @media only screen and (max-width: 480px)  {
-@@ -129,9 +127,9 @@ position: absolute;
+ 	.information{
+@@ -129,9 +124,9 @@ position: absolute;
  right: 15px;
  top: 13px;
  padding: 3px 10px;
