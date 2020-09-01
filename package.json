@@ -18,7 +18,6 @@
   "dependencies": {
     "hubot": "^3.3.2",
     "hubot-bikeshed": ">= 0.0.0",
-    "hubot-brain-import": "^0.1.2",
     "hubot-brain-inspect": "^0.0.1",
     "hubot-diagnostics": "^1.0.0",
     "hubot-help": "^1.0.1",
