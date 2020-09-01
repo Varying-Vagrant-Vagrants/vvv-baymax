@@ -31,7 +31,6 @@ module.exports = robot => {
   // robot.listenerMiddleware(function(context, next, done) {
   robot.catchAll(msg => {
     const message = msg.message;
-    console.log("is in listener");
 
     // only handle channel slack messages
     if (!message._channel_id) {

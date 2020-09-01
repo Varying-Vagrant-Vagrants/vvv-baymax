@@ -19,6 +19,7 @@
     "hubot": "^3.3.2",
     "hubot-auth-persistent": ">=0",
     "hubot-bikeshed": ">= 0.0.0",
+    "hubot-brain-inspect": "^0.0.1",
     "hubot-diagnostics": "^1.0.0",
     "hubot-help": "^1.0.1",
     "hubot-heroku-deploy-notifier": "*",
