@@ -28,6 +28,7 @@ module.exports = robot => {
     const readOnly = getReadOnlyChannels();
     return readOnly.some(data => data.id == roomId);
   };
+
   // robot.listenerMiddleware(function(context, next, done) {
   robot.catchAll(msg => {
     const message = msg.message;
@@ -45,9 +46,7 @@ module.exports = robot => {
     }
 
     const is_bot = R.pathOr(false, ["user", "slack", "is_bot"], message);
-
     const is_app = R.pathOr(false, ["user", "slack", "is_app"], message);
-
     if (is_bot || is_app) {
       console.log({ is_bot, is_app });
       msg.finish();
@@ -56,7 +55,7 @@ module.exports = robot => {
 
     web.chat.postEphemeral(
       message.rawMessage.channel,
-      "This is a read only channel, don't say things in here!",
+      "This is a read only channel, you can't post messages in here!",
       message.user.id,
       {
         attachments: [
@@ -84,7 +83,7 @@ module.exports = robot => {
     return;
   });
 
-  robot.respond(
+  /*robot.respond(
     /(?:make |set |mark )?#?([^\s]+) (?:is |as )?read only$/i,
     msg => {
       const channel = msg.match[1].trim();
@@ -113,9 +112,9 @@ module.exports = robot => {
         })
         .catch(robot.logger.debug);
     }
-  );
+  );*/
 
-  robot.respond(/#?([^\s]+) (?:is not|isn`?t) read only$/i, msg => {
+  /*  robot.respond(/#?([^\s]+) (?:is not|isn`?t) read only$/i, msg => {
     const channel = msg.match[1].trim();
 
     if (!robot.auth.isAdmin(msg.message.user)) {
@@ -144,7 +143,7 @@ module.exports = robot => {
         return msg.reply(`#${channel} is no longer read only.`);
       })
       .catch(robot.logger.debug);
-  });
+  });*/
 
   robot.respond(/which channels are read only$/i, msg => {
     const readOnly = getReadOnlyChannels();
@@ -153,7 +152,7 @@ module.exports = robot => {
     return msg.reply(`These channels are read only: ${channel_list}.`);
   });
 
-  robot.respond(/no channels are read only$/i, msg => {
+  /*  robot.respond(/no channels are read only$/i, msg => {
     if (!robot.auth.isAdmin(msg.message.user)) {
       return msg.reply(
         "Sorry, only admins can mark all channels as not read only."
@@ -161,5 +160,5 @@ module.exports = robot => {
     }
     robot.brain.set("read_only_channels", []);
     return msg.reply(`There are now no read only channels!`);
-  });
+  });*/
 };
