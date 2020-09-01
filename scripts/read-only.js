@@ -22,10 +22,16 @@ module.exports = robot => {
       return room ? room : "";
     });
   const getReadOnlyChannels = () => {
-    if (!robot.brain.get("read_only_channels")) {
-      robot.brain.set("read_only_channels", []);
+    let channels = robot.brain.get("read_only_channels");
+    if (typeof channels !== "undefined") {
+      return [
+        {
+          id: "CP2BLJ19D",
+          channel: "firehose"
+        }
+      ];
     }
-    return robot.brain.get("read_only_channels");
+    return channels;
   };
   const isReadOnly = roomId => {
     const readOnly = getReadOnlyChannels();
@@ -38,7 +44,6 @@ module.exports = robot => {
 
     // only handle channel slack messages
     if (!message._channel_id) {
-      console.log("Not a slack text message?");
       msg.finish();
       return;
     }
@@ -150,7 +155,7 @@ module.exports = robot => {
 
   robot.respond(/which channels are read only$/i, msg => {
     const readOnly = getReadOnlyChannels();
-    const channels = readOnly.map(data => `#${data.channel} (${data.id})`);
+    const channels = readOnly.map(data => `"#${data.channel} (${data.id})"`);
     const channel_list = channels.join();
     return msg.reply(`These channels are read only: ${channel_list}.`);
   });
