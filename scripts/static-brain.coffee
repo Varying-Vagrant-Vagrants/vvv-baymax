@@ -4,8 +4,7 @@
 fs = require 'fs'
 
 module.exports = (robot) ->
-  robot.brain.once 'loaded', (data) ->
-    file = process.env.BRAIN_IMPORT_FILE || process.cwd() + '/brain-import.json'
+  file = process.env.BRAIN_IMPORT_FILE || process.cwd() + '/brain-import.json'
     robot.logger.info "Looking for #{file}"
     fs.exists file, (exists) ->
       if !exists
