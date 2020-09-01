@@ -4,5 +4,6 @@
       "id": "CP2BLJ19D",
       "channel": "firehose"
     }
-  ]
+  ],
+  "test": "hello world"
 }
