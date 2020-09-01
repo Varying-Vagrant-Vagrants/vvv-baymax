@@ -1,3 +1,6 @@
+// Description:
+//   Read only channels
+
 const { WebClient } = require("@slack/client");
 const R = require("ramda");
 
