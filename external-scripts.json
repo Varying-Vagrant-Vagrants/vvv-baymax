@@ -1,10 +1,9 @@
 [
-  "hubot-auth-persistent",
   "hubot-bikeshed",
+  "hubot-brain-import",
   "hubot-brain-inspect",
   "hubot-diagnostics",
   "hubot-help",
-  "hubot-redis-brain",
   "hubot-rules",
   "hubot-shipit",
   "hubot-thank-you"
