@@ -23,7 +23,7 @@ module.exports = robot => {
     });
   const getReadOnlyChannels = () => {
     let channels = robot.brain.get("read_only_channels");
-    if (typeof channels == "undefined") {
+    if (typeof channels !== "object") {
       return [
         {
           id: "CP2BLJ19D",
