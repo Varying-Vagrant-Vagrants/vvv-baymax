@@ -72,7 +72,7 @@ module.exports = robot => {
 
     web.chat.postEphemeral(
       message.rawMessage.channel,
-      "This is a read only channel, you can't post messages in here!",
+      "This is a read only channel, you can't post messages in here! Try #development instead",
       message.user.id,
       {
         attachments: [
