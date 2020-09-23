@@ -6,6 +6,7 @@ const R = require("ramda");
 
 module.exports = robot => {
   const web = new WebClient(process.env.HUBOT_SLACK_ADMIN_TOKEN);
+  console.log("listening for read only channels");
 
   const getChannelID = channelName =>
     web.channels.list().then(api_response => {
@@ -55,12 +56,25 @@ module.exports = robot => {
 
     const is_bot = R.pathOr(false, ["user", "slack", "is_bot"], message);
     const is_app = R.pathOr(false, ["user", "slack", "is_app"], message);
-    const is_app_user = R.pathOr(false, ["user", "slack", "is_app_user"], message);
+    const is_app_user = R.pathOr(
+      false,
+      ["user", "slack", "is_app_user"],
+      message
+    );
     if (is_bot || is_app || is_app_user) {
-      console.log({ "message": "other bot/app spoke in " + message.rawMessage.channel, is_bot, is_app, is_app_user });
+      console.log({
+        message: "other bot/app spoke in " + message.rawMessage.channel,
+        is_bot,
+        is_app,
+        is_app_user
+      });
       msg.finish();
       return;
     }
+
+    console.log("deleting message in read only channel:");
+
+    console.log(message);
 
     web.chat.postEphemeral(
       message.rawMessage.channel,
