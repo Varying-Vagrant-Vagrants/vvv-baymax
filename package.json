@@ -25,9 +25,9 @@
     "hubot-rules": "^1.0.0",
     "hubot-scripts": "^2.17.2",
     "hubot-shipit": "https://github.com/alfredk/hubot-shipit/archive/image_repair.tar.gz",
-    "hubot-slack": "^4.7.1",
+    "hubot-slack": "^4.8.0",
     "hubot-thank-you": "*",
-    "patch-package": "^6.2.0",
+    "patch-package": "^6.2.2",
     "ramda": "*",
     "slack-invite-automation": "git+https://github.com/outsideris/slack-invite-automation.git"
   },
