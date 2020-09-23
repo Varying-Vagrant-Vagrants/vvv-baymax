@@ -4,5 +4,7 @@
   "hubot-help",
   "hubot-rules",
   "hubot-shipit",
-  "hubot-thank-you"
+  "hubot-thank-you",
+  "hubot-rss-reader",
+  "hubot-brain-inspect"
 ]
