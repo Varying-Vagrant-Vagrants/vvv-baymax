@@ -54,18 +54,12 @@ module.exports = robot => {
       return;
     }
 
-    const is_bot = R.pathOr(false, ["user", "slack", "is_bot"], message);
-    const is_app = R.pathOr(false, ["user", "slack", "is_app"], message);
-    const is_app_user = R.pathOr(
-      false,
-      ["user", "slack", "is_app_user"],
-      message
-    );
+    const is_bot = R.pathOr(false, ["user", "is_bot"], message);
+    const is_app_user = R.pathOr(false, ["user", "is_app_user"], message);
     if (is_bot || is_app || is_app_user) {
       console.log({
         message: "other bot/app spoke in " + message.rawMessage.channel,
         is_bot,
-        is_app,
         is_app_user
       });
       msg.finish();
