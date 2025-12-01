@@ -13,28 +13,23 @@
     "postinstall": "patch-package"
   },
   "engines": {
-    "node": "10.x"
+    "node": "24.x"
   },
   "dependencies": {
-    "hubot": "^3.3.2",
-    "hubot-bikeshed": ">= 0.0.0",
+    "hubot": "^13.1.4",
     "hubot-brain-inspect": "^0.0.1",
-    "hubot-diagnostics": "^1.0.0",
-    "hubot-help": "^1.0.1",
-    "hubot-heroku-deploy-notifier": "*",
-    "hubot-rss-reader": "^0.8.3",
-    "hubot-rules": "^1.0.0",
+    "hubot-diagnostics": "^2.1.3",
+    "hubot-help": "^2.1.5",
+    "hubot-rules": "^2.1.1",
     "hubot-scripts": "^2.17.2",
-    "hubot-shipit": "https://github.com/alfredk/hubot-shipit/archive/image_repair.tar.gz",
-    "hubot-slack": "^4.8.0",
-    "hubot-thank-you": "*",
-    "patch-package": "^6.2.2",
+    "hubot-slack": "^4.10.0",
+    "patch-package": "^8.0.1",
     "ramda": "*",
     "slack-invite-automation": "git+https://github.com/outsideris/slack-invite-automation.git"
   },
   "devDependencies": {
     "husky": "^3.0.8",
-    "lint-staged": "^9.4.1",
-    "prettier": "^1.18.2"
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.3"
   }
 }
